@@ -11,12 +11,20 @@ def scrape_twitch_links(url):
     Get twitch clip urls from specified subreddit
     """
 
-    driver = webdriver.PhantomJS()
-    #driver = webdriver.Firefox()
+    #driver = webdriver.PhantomJS()
+    driver = webdriver.Firefox()
     driver.get(url)
     elements = driver.find_elements_by_xpath(TWITCH_CLIP_XPATH)
     urls = []
     for element in elements:
         value = element.get_attribute("data-href-url")
         urls.append(value)
-    return urls
+
+    video_urls = []
+
+    for url in urls:
+        driver.get(url)
+        element = driver.find_element_by_xpath("//video[@type='video/mp4']")
+        video_urls.append(element.get_attribute("src"))
+
+    return video_urls
