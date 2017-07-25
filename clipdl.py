@@ -9,7 +9,6 @@ def download_clip(clip):
     """
     Downloads twitch clip from given url.
     Saves video as mp4.
-    Default filename is 'video'
     """
     res = requests.get(clip.source)
     res.raise_for_status()
