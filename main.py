@@ -18,7 +18,6 @@ def main():
     driver = webdriver.Firefox()
     url = SUBREDDIT + SEARCH
     clips = rs.get_twitch_info(rs.scrape_twitch_links(url, driver), driver)
-    print(clips)
     for clip in clips:
         clipdl.download_clip(clip)
     run(MAKE_VIDEO_COMMAND)
