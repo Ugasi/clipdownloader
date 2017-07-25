@@ -22,8 +22,8 @@ def scrape_twitch_links(url):
 
     video_urls = []
 
-    for url in urls:
-        driver.get(url)
+    for vid_source in urls:
+        driver.get(vid_source)
         element = driver.find_element_by_xpath("//video[@type='video/mp4']")
         video_urls.append(element.get_attribute("src"))
 
