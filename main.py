@@ -12,9 +12,10 @@ def main():
     Main
     """
     url = SUBREDDIT + SEARCH
-    video_urls = redditscraper.scrape_twitch_links(url)
-    for cur, video_url in enumerate(video_urls):
-        clipdl.download_clip(video_url, str(cur))
+    clips = redditscraper.scrape_twitch_links(url)
+    print(clips)
+    for clip in clips:
+        clipdl.download_clip(clip)
 
 
 if __name__ == "__main__":
