@@ -3,7 +3,6 @@ Scrapes specified subreddit for clips.twitch.tv urls
 """
 
 from selenium import webdriver
-import requests
 
 TWITCH_CLIP_XPATH = "//div[@class='search-result-footer']//a[contains(@href,'clips.twitch')]"
 
