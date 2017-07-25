@@ -2,7 +2,6 @@
 Runs everything
 """
 from subprocess import run
-
 import clipdl
 import redditscraper as rs
 from selenium import webdriver
