@@ -2,7 +2,7 @@
 Scrapes specified subreddit for clips.twitch.tv urls
 """
 
-from selenium import webdriver
+
 from clip import Clip
 
 TWITCH_CLIP_XPATH = "//div[@class='search-result-footer']//a[contains(@href,'clips.twitch')]"
@@ -12,20 +12,25 @@ CLIP_NAME_XPATH = "//div[@class='view-clip__title']"
 SRC_ATTR = "src"
 HREF_ATTR = "href"
 
-def scrape_twitch_links(url):
+def scrape_twitch_links(url, driver):
     """
     Get twitch clip urls from specified subreddit's search results
     """
-
     #driver = webdriver.PhantomJS()
-    driver = webdriver.Firefox()
     driver.get(url)
     elements = driver.find_elements_by_xpath(TWITCH_CLIP_XPATH)
     urls = []
+
     for element in elements:
         value = element.get_attribute(HREF_ATTR)
         urls.append(value)
 
+    return urls
+
+def get_twitch_info(urls, driver):
+    """
+    Parses video source, streamer name and clip name from given list of twitch url
+    """
     clips = []
 
     for vid_source in urls:
