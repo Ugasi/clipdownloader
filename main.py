@@ -8,7 +8,7 @@ from selenium import webdriver
 
 
 SUBREDDIT = "https://www.reddit.com/r/hearthstone/"
-SEARCH = "search?q=clips.twitch.tv&restrict_sr=on&sort=hot&t=day"
+SEARCH = "search?q=clips.twitch.tv+highlight&restrict_sr=on&sort=hot&t=day"
 MAKE_VIDEO_COMMAND = ["blender", "-b", "-P", "makevideo.py"]
 
 def main():
