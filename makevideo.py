@@ -2,7 +2,6 @@
 Moviepy script
 Combines all videos into single video
 """
-import os
 from moviepy.editor import VideoFileClip as vfc, concatenate_videoclips as cvc
 from moviepy.video.fx.fadein import fadein
 from moviepy.video.fx.fadeout import fadeout
