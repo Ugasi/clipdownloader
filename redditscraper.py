@@ -1,8 +1,7 @@
 """
 Scrapes specified subreddit for clips.twitch.tv urls
 """
-
-
+import re
 from clip import Clip
 
 TWITCH_CLIP_XPATH = "//div[@class='search-result-footer']//a[contains(@href,'clips.twitch')]"
@@ -24,7 +23,7 @@ def scrape_twitch_links(url, driver):
     for element in elements:
         value = element.get_attribute(HREF_ATTR)
         urls.append(value)
-
+    print("Amount of videos expected: "+str(len(urls)))
     return urls
 
 def get_twitch_info(urls, driver):
@@ -33,11 +32,14 @@ def get_twitch_info(urls, driver):
     """
     clips = []
 
-    for vid_source in urls:
+    for index, vid_source in enumerate(urls):
         driver.get(vid_source)
         source = driver.find_element_by_xpath(VID_SOURCE_XPATH).get_attribute(SRC_ATTR)
+        if "index" in source:
+            print("Video from source")
+            continue
         streamer = driver.find_element_by_xpath(STREAMER_XPATH).text
-        clip_name = driver.find_element_by_xpath(CLIP_NAME_XPATH).text
+        clip_name = str(index)
         clip = Clip(source, streamer, clip_name)
         clips.append(clip)
 
