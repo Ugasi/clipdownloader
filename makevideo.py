@@ -2,11 +2,11 @@
 Moviepy script
 Combines all videos into single video
 """
-from moviepy.editor import VideoFileClip as vfc, concatenate_videoclips as cvc
+from moviepy.editor import VideoFileClip as vfc, concatenate_videoclips as cvc, ColorClip as cc
 from moviepy.video.fx.fadein import fadein
 from moviepy.video.fx.fadeout import fadeout
 
-CLIP_PATH = "videos2\\"
+CLIP_PATH = "videos\\"
 
 def make_video(video_paths):
     """
@@ -17,5 +17,6 @@ def make_video(video_paths):
         video = fadein(fadeout(vfc(path), 1), 1)
         videos.append(video)
 
-    result_clip = cvc(videos)
+    black_image = cc((1280, 720), color=[0, 0, 0], duration=0.5)
+    result_clip = cvc(videos, transition=black_image)
     result_clip.write_videofile("result.mp4")
