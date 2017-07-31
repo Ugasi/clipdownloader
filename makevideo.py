@@ -19,4 +19,4 @@ def make_video(video_paths):
 
     black_image = cc((1280, 720), color=[0, 0, 0], duration=0.5)
     result_clip = cvc(videos, transition=black_image)
-    result_clip.write_videofile("result.mp4")
+    result_clip.write_videofile("result.mp4", codec="mpeg4")

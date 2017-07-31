@@ -2,45 +2,59 @@
 Scrapes specified subreddit for clips.twitch.tv urls
 """
 import re
+import requests
+from bs4 import BeautifulSoup as bs
 from clip import Clip
 
-TWITCH_CLIP_XPATH = "//div[@class='search-result-footer']//a[contains(@href,'clips.twitch')]"
-VID_SOURCE_XPATH = "//video[@type='video/mp4']"
-STREAMER_XPATH = "//div[@class='view-bc-meta__name ellipsis']//a"
-CLIP_NAME_XPATH = "//div[@class='view-clip__title']"
+TWITCH_BS_STRING = "div[class='search-result-footer'] > a[href*=clips.twitch]"
+VID_SOURCE_BS_STRING = "script"
+STREAMER_BS_STRING = "div[class='view-bc-meta__name ellipsis'] > a"
+CLIP_NAME_BS_STRING = "div[class='view-clip__title]"
+REGEX = r"(?P<url>https://clips-media-assets\.twitch\.tv.*?offset.*?mp4)"
 SRC_ATTR = "src"
 HREF_ATTR = "href"
-
-def scrape_twitch_links(url, driver):
+AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:54.0) Gecko/20100101 Firefox/54.0"
+HEADERS = {
+    'User-Agent':AGENT
+}
+def scrape_twitch_links(url):
     """
     Get twitch clip urls from specified subreddit's search results
     """
-    #driver = webdriver.PhantomJS()
-    driver.get(url)
-    elements = driver.find_elements_by_xpath(TWITCH_CLIP_XPATH)
+    res = requests.get(url, headers=HEADERS)
+    soup = bs(res.content)
+    links = soup.select(TWITCH_BS_STRING)
     urls = []
-
-    for element in elements:
-        value = element.get_attribute(HREF_ATTR)
-        urls.append(value)
-    print("Amount of videos expected: "+str(len(urls)))
+    for link in links:
+        urls.append(link.get(HREF_ATTR))
+    print("Amount of videos expected: "+str(len(links)))
+    print(urls)
     return urls
 
-def get_twitch_info(urls, driver):
+def get_twitch_info(urls):
     """
     Parses video source, streamer name and clip name from given list of twitch url
     """
     clips = []
-
-    for index, vid_source in enumerate(urls):
-        driver.get(vid_source)
-        source = driver.find_element_by_xpath(VID_SOURCE_XPATH).get_attribute(SRC_ATTR)
-        if "index" in source:
-            print("Video from source")
+    for index, url in enumerate(urls):
+        vid_src = None
+        res = requests.get(url, headers=HEADERS)
+        soup = bs(res.content)
+        source = soup.select(VID_SOURCE_BS_STRING)
+        for src in source:
+            string = str(src)
+            matches = re.search(REGEX, string)
+            if matches is not None:
+                vid_src = matches.group("url")
+                break
+        if "index" in vid_src:
+            print("Skipping video")
             continue
-        streamer = driver.find_element_by_xpath(STREAMER_XPATH).text
+        else:
+            print("Video from "+vid_src)
+        streamer = soup.select(STREAMER_BS_STRING)
         clip_name = str(index)
-        clip = Clip(source, streamer, clip_name)
+        clip = Clip(vid_src, streamer, clip_name)
         clips.append(clip)
 
     return clips
