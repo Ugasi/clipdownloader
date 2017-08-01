@@ -1,7 +1,6 @@
 """
 Runs everything
 """
-#from subprocess import run
 import os
 import time
 import clipdl
@@ -11,7 +10,6 @@ import makevideo as mv
 SUBREDDIT = "https://www.reddit.com/r/hearthstone/"
 SEARCH = "search?q=clips.twitch.tv+highlight&restrict_sr=on&sort=hot&t=day"
 CLIP_PATH = "videos\\"
-#MAKE_VIDEO_COMMAND = ["blender", "-b", "-P", "makevideo.py"]
 
 def main():
     """
@@ -23,7 +21,6 @@ def main():
         clipdl.download_clip(clip)
         print("Video: "+str(index))
         time.sleep(2)
-    #run(MAKE_VIDEO_COMMAND)
     video_paths = []
     if not os.path.exists(CLIP_PATH):
         os.makedirs(CLIP_PATH)
