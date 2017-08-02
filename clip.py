@@ -8,9 +8,9 @@ class Clip(object):
     """
 
     file_format = ".mp4"
-    location = "videos\\"
 
-    def __init__(self, source, streamer, name):
+    def __init__(self, source, streamer, name, location):
         self.source = source
         self.streamer = streamer
         self.name = name
+        self.location = location

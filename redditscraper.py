@@ -54,7 +54,7 @@ def get_twitch_info(urls):
             print("Video from "+vid_src)
         streamer = soup.select(STREAMER_BS_STRING)
         clip_name = str(index)
-        clip = Clip(vid_src, streamer, clip_name)
+        clip = Clip(vid_src, streamer, clip_name, None)
         clips.append(clip)
 
     return clips
