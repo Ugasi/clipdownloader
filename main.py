@@ -19,6 +19,7 @@ def main():
     Main
     """
     for url in URLS:
+        url = url.replace("\n", "")
         subreddit = re.search(PARSE_SUB, url)
         subreddit = subreddit.group("subreddit")
         save_path = os.path.join(CLIP_PATH, subreddit)
