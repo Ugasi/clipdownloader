@@ -1,2 +1,7 @@
-https://www.reddit.com/r/hearthstone/search?q=clips.twitch.tv+highlight&restrict_sr=on&sort=hot&t=day
-https://www.reddit.com/r/heroesofthestorm/search?q=clips.twitch.tv&restrict_sr=on&sort=hot&t=day
+https://www.reddit.com/r/hearthstone/search?q=clips.twitch.tv+highlight&restrict_sr=on&sort=top&t=day
+https://www.reddit.com/r/heroesofthestorm/search?q=clips.twitch.tv&restrict_sr=on&sort=top&t=day
+https://www.reddit.com/r/PUBATTLEGROUNDS/search?q=clips.twitch.tv+highlight&restrict_sr=on&sort=top&t=day
+https://www.reddit.com/r/DotA2/search?q=clips.twitch.tv+highlight&restrict_sr=on&sort=top&t=all
+https://www.reddit.com/r/leagueoflegends/search?q=clips.twitch.tv&restrict_sr=on&sort=top&t=day
+https://www.reddit.com/r/GlobalOffensive/search?q=clips.twitch.tv+highlight&restrict_sr=on&sort=top&t=day
+https://www.reddit.com/r/Overwatch/search?q=clips.twitch.tv+highlight&restrict_sr=on&sort=top&t=day
