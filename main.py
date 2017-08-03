@@ -3,6 +3,7 @@ Runs everything
 """
 import os
 import time
+import datetime
 import re
 import clipdl
 import redditscraper as rs
@@ -35,9 +36,13 @@ def main():
             video_paths = []
             for clip in os.listdir(save_path):
                 video_paths.append(os.path.join(save_path, clip))
-            mv.make_video(video_paths)
+            #mv.make_video(video_paths)
         else:
             continue
 
 if __name__ == "__main__":
+    START_TIME = datetime.datetime.now()
     main()
+    END_TIME = datetime.datetime.now()
+    EXEC_TIME = END_TIME-START_TIME
+    print(EXEC_TIME)
