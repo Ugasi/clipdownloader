@@ -26,15 +26,18 @@ def main():
         if not os.path.exists(save_path):
             os.makedirs(save_path)
         clips = rs.get_twitch_info(rs.scrape_twitch_links(url), save_path)
-        for index, clip in enumerate(clips):
-            clip.location = save_path
-            clipdl.download_clip(clip)
-            print("Video: "+str(index))
-            time.sleep(1)
-        video_paths = []
-        for clip in os.listdir(save_path):
-            video_paths.append(os.path.join(save_path, clip))
-        mv.make_video(video_paths)
+        if clips:
+            for index, clip in enumerate(clips):
+                clip.location = save_path
+                clipdl.download_clip(clip)
+                print("Video: "+str(index))
+                time.sleep(1)
+            video_paths = []
+            for clip in os.listdir(save_path):
+                video_paths.append(os.path.join(save_path, clip))
+            mv.make_video(video_paths)
+        else:
+            continue
 
 if __name__ == "__main__":
     main()
