@@ -32,7 +32,7 @@ def main():
                 clip.location = save_path
                 clipdl.download_clip(clip)
                 print("Video: "+str(index))
-                time.sleep(1)
+                time.sleep(2)
             video_paths = []
             for clip in os.listdir(save_path):
                 video_paths.append(os.path.join(save_path, clip))
