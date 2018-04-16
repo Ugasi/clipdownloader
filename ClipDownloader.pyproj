@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{d2f04a09-848b-4838-82ed-5092682b2a25}</ProjectGuid>
     <ProjectHome />
-    <StartupFile>objects\clip.py</StartupFile>
+    <StartupFile>clip.py</StartupFile>
     <SearchPath />
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -23,16 +23,11 @@
     <Content Include="data.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="objects\clip.py" />
-    <Compile Include="utilities\clipdl.py" />
+    <Compile Include="clip.py" />
+    <Compile Include="clipdl.py" />
     <Compile Include="main.py" />
-    <Compile Include="utilities\makevideo.py" />
-    <Compile Include="utilities\redditscraper.py" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="resources\" />
-    <Folder Include="objects\" />
-    <Folder Include="utilities\" />
+    <Compile Include="makevideo.py" />
+    <Compile Include="redditscraper.py" />
   </ItemGroup>
   <ItemGroup>
     <InterpreterReference Include="Global|PythonCore|3.6" />
