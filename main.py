@@ -15,6 +15,23 @@ URL_FILE = open("data.txt")
 URLS = URL_FILE.readlines()
 URL_FILE.close()
 
+def check_output_folder(save_path):
+    if not os.path.exists(save_path):
+        os.makedirs(save_path)
+
+def download_clips(clips, save_path):
+    for index, clip in enumerate(clips):
+        clip.location = save_path
+        clipdl.download_clip(clip)
+        print("Video: "+str(index))
+        time.sleep(2)
+
+def get_downloaded_video_paths(save_path):
+    video_paths = []
+    for clip in os.listdir(save_path):
+        video_paths.append(os.path.join(save_path, clip))
+    return video_paths
+
 def main():
     """
     Main
@@ -24,19 +41,12 @@ def main():
         subreddit = re.search(PARSE_SUB, url)
         subreddit = subreddit.group("subreddit")
         save_path = os.path.join(CLIP_PATH, subreddit)
-        if not os.path.exists(save_path):
-            os.makedirs(save_path)
+        check_output_folder(save_path)
         clips = rs.get_twitch_info(rs.scrape_twitch_links(url), save_path)
         if clips:
-            for index, clip in enumerate(clips):
-                clip.location = save_path
-                clipdl.download_clip(clip)
-                print("Video: "+str(index))
-                time.sleep(2)
-            video_paths = []
-            for clip in os.listdir(save_path):
-                video_paths.append(os.path.join(save_path, clip))
-            #mv.make_video(video_paths)
+            download_clips(clips, save_path)
+            video_paths = get_downloaded_video_paths(save_path)
+            mv.make_video(video_paths)
         else:
             continue
 

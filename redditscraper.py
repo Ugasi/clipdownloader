@@ -7,6 +7,10 @@ import requests
 from bs4 import BeautifulSoup as bs
 from clip import Clip
 
+# TODO: Check that reddit clip is taken from live and that time it was clipped
+#       doesnt collide with other clips from same streamer
+# TODO: And maybe async download
+
 TWITCH_BS_STRING = "div[class='search-result-footer'] > a[href*=clips.twitch]"
 VID_SOURCE_BS_STRING = "script"
 STREAMER_BS_STRING = "div[class='view-bc-meta__name ellipsis']"
